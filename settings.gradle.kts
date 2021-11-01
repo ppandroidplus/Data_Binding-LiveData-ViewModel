@@ -1,2 +1,2 @@
 rootProject.name = "AssignmentMVVM"
-include ':app'
+include(":app")
