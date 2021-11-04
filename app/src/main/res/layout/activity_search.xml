@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View" />
-
         <variable
             name="viewModel"
-            type="place.pic.android.plus.viewmodel.SearchViewModel" />
+            type="place.pic.android.plus.viewmodel.UserSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.SearchActivity">
+        tools:context=".view.UserSearchActivity">
 
         <EditText
             android:id="@+id/et_user_search"
@@ -23,6 +21,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
+            android:background="@null"
             app:layout_constraintEnd_toStartOf="@+id/bt_user_search"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +42,7 @@
             android:id="@+id/rcv_user_search"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

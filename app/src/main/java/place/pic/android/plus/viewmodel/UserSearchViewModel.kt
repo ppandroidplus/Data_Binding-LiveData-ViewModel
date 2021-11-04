@@ -16,7 +16,7 @@ import retrofit2.Response
  * on 11월 02일, 2020
  */
 
-class SearchViewModel : ViewModel() {
+class UserSearchViewModel : ViewModel() {
 
     private val list = mutableListOf<User>()
 
@@ -48,12 +48,9 @@ class SearchViewModel : ViewModel() {
                                 id = response.body()!!.items[i].id
                             )
                         )
-                        Log.d("dahye server response check", response.body()!!.items[i].login)
                     }
                 }
-                Log.d("dahye final data check", _users.value.toString())
             }
-
 
             override fun onFailure(call: Call<UserSearchResponse>, t: Throwable) {
                 t.message?.let { Log.d("fail", it) }
