@@ -1,7 +1,7 @@
 package place.pic.android.plus.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import place.pic.android.plus.R
 import place.pic.android.plus.databinding.ActivityUserDatailBinding
@@ -10,7 +10,7 @@ import place.pic.android.plus.viewmodel.UserDetailViewModel
 class UserDetailActivity : AppCompatActivity() {
 
     private lateinit var userDetailViewModel: UserDetailViewModel
-    private var username: String =""
+    private var username: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class UserDetailActivity : AppCompatActivity() {
         binding.viewModel = userDetailViewModel
         userDetailViewModel.requestUserDetail(username)
         userDetailViewModel.userDetail.observe(this) {
-            //userDetailViewModel.setUserDetail()
+            // userDetailViewModel.setUserDetail()
         }
         setContentView(binding.root)
     }

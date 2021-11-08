@@ -1,14 +1,11 @@
 package place.pic.android.plus.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import place.pic.android.plus.databinding.ItemUserSearchBinding
 import place.pic.android.plus.model.User
-import place.pic.android.plus.view.UserDetailActivity
 
 /**
  * Created By kimdahyee
@@ -17,8 +14,8 @@ import place.pic.android.plus.view.UserDetailActivity
 
 class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>() {
 
-    private var data : MutableList<User> = mutableListOf()
-    private var itemClickListener: ((user: User) -> Unit) ?= null
+    private var data: MutableList<User> = mutableListOf()
+    private var itemClickListener: ((user: User) -> Unit) ? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

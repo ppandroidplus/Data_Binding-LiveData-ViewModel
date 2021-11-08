@@ -1,6 +1,5 @@
 package place.pic.android.plus.model
 
-import androidx.annotation.Nullable
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -24,3 +23,4 @@ data class UserDetail(
     @SerializedName("html_url")
     val htmlUrl: String
 )
+

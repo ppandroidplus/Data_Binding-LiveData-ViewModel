@@ -21,7 +21,7 @@ class UserSearchViewModel : ViewModel() {
     private val list = mutableListOf<User>()
 
     private val _users = MutableLiveData<List<User>>()
-    val users : LiveData<List<User>>
+    val users: LiveData<List<User>>
         get() = _users
 
     fun addUser(user: User) {

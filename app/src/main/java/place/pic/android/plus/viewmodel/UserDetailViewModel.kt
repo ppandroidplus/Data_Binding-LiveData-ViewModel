@@ -21,7 +21,7 @@ class UserDetailViewModel : ViewModel() {
 
     private lateinit var user: UserDetail
     private val _userDetail = MutableLiveData<UserDetail>()
-    val userDetail : LiveData<UserDetail>
+    val userDetail: LiveData<UserDetail>
         get() = _userDetail
 
     fun setUserDetail() {

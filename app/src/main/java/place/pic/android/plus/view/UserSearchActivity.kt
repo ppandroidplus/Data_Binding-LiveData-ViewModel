@@ -2,11 +2,11 @@ package place.pic.android.plus.view
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import place.pic.android.plus.R
 import place.pic.android.plus.adapter.UserSearchAdapter
@@ -63,7 +63,7 @@ class UserSearchActivity : AppCompatActivity() {
     private fun hideKeyboard() {
         currentFocus?.run {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            imm?.hideSoftInputFromWindow(windowToken, 0) }
+            imm?.hideSoftInputFromWindow(windowToken, 0)
+        }
     }
-
 }
