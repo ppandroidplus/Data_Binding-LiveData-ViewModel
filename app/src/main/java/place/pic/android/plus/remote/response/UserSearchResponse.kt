@@ -5,12 +5,12 @@ package place.pic.android.plus.remote.response
  * on 11월 02일, 2020
  */
 
-data class UserSearchResponse (
+data class UserSearchResponse(
     val total_count: Int,
     val incomplete_results: Boolean,
     val items: List<Data>
 ) {
-    data class Data (
+    data class Data(
         val login: String,
         val id: Long,
         val node_id: String,

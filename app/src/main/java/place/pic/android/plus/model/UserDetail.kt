@@ -23,4 +23,3 @@ data class UserDetail(
     @SerializedName("html_url")
     val htmlUrl: String
 )
-
