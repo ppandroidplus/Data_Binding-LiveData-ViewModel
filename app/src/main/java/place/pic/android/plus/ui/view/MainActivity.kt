@@ -1,4 +1,4 @@
-package place.pic.android.plus.view
+package place.pic.android.plus.ui.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

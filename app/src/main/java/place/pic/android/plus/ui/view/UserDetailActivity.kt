@@ -1,15 +1,15 @@
-package place.pic.android.plus.view
+package place.pic.android.plus.ui.view
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import place.pic.android.plus.R
 import place.pic.android.plus.databinding.ActivityUserDatailBinding
-import place.pic.android.plus.viewmodel.UserDetailViewModel
+import place.pic.android.plus.ui.viewmodel.UserDetailViewModel
 
 class UserDetailActivity : AppCompatActivity() {
 
-    private lateinit var userDetailViewModel: UserDetailViewModel
+    private val userDetailViewModel: UserDetailViewModel by viewModels()
     private var username: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,16 +21,8 @@ class UserDetailActivity : AppCompatActivity() {
 
     private fun init() {
         val binding = ActivityUserDatailBinding.inflate(layoutInflater)
-        binding.lifecycleOwner = this
-        userDetailViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(UserDetailViewModel::class.java)
         binding.viewModel = userDetailViewModel
         userDetailViewModel.requestUserDetail(username)
-        userDetailViewModel.userDetail.observe(this) {
-            // userDetailViewModel.setUserDetail()
-        }
         setContentView(binding.root)
     }
 }

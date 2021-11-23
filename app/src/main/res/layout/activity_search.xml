@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="place.pic.android.plus.viewmodel.UserSearchViewModel" />
+            type="place.pic.android.plus.ui.viewmodel.UserSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.UserSearchActivity">
+        tools:context=".ui.view.UserSearchActivity">
 
         <EditText
             android:id="@+id/et_user_search"

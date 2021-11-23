@@ -1,12 +1,14 @@
-package place.pic.android.plus.viewmodel
+package place.pic.android.plus.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import place.pic.android.plus.model.User
-import place.pic.android.plus.remote.GithubApiServiceImpl
-import place.pic.android.plus.remote.response.UserSearchResponse
+import place.pic.android.plus.data.model.User
+import place.pic.android.plus.data.remote.GithubApiServiceImpl
+import place.pic.android.plus.data.remote.response.UserSearchResponse
+import place.pic.android.plus.ui.Event
+import place.pic.android.plus.ui.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +29,15 @@ class UserSearchViewModel : ViewModel() {
     fun addUser(user: User) {
         list.add(user)
         _users.value = list
+    }
+
+    private val _searchItemClickEvent = SingleLiveEvent<Event<String>>()
+    val searchItemClickEvent: SingleLiveEvent<Event<String>>
+        get() = _searchItemClickEvent
+
+    fun setSearchItemClickEvent() { // itemId: String
+        _searchItemClickEvent.call()
+        // _searchItemClickEvent.value = Event(itemId)
     }
 
     fun requestUserSearch(query: String) {

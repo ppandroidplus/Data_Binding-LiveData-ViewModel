@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="place.pic.android.plus.viewmodel.UserDetailViewModel" />
+            type="place.pic.android.plus.ui.viewmodel.UserDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.UserDetailActivity">
+        tools:context=".ui.view.UserDetailActivity">
 
         <ImageView
             android:id="@+id/img_user_detail"

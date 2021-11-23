@@ -1,4 +1,4 @@
-package place.pic.android.plus.model
+package place.pic.android.plus.data.model
 
 import com.google.gson.annotations.SerializedName
 

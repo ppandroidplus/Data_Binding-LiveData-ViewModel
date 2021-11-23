@@ -1,4 +1,4 @@
-package place.pic.android.plus.remote.response
+package place.pic.android.plus.data.remote.response
 
 /**
  * Created By kimdahyee

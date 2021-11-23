@@ -1,50 +1,63 @@
-package place.pic.android.plus.view
+package place.pic.android.plus.ui.view
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import place.pic.android.plus.R
-import place.pic.android.plus.adapter.UserSearchAdapter
 import place.pic.android.plus.databinding.ActivitySearchBinding
-import place.pic.android.plus.model.User
-import place.pic.android.plus.viewmodel.UserSearchViewModel
+import place.pic.android.plus.ui.adapter.UserSearchAdapter
+import place.pic.android.plus.ui.viewmodel.UserSearchViewModel
 
 class UserSearchActivity : AppCompatActivity() {
 
-    private lateinit var userSearchViewModel: UserSearchViewModel
+    private val userSearchViewModel: UserSearchViewModel by viewModels()
     private val userSearchAdapter by lazy { UserSearchAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
         init()
+        // setContentView(R.layout.activity_search)
     }
 
     private fun init() {
         val binding = ActivitySearchBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
-        userSearchViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(UserSearchViewModel::class.java)
         binding.viewModel = userSearchViewModel
-        userSearchViewModel.users.observe(this) { it ->
+        userSearchViewModel.users.observe(this) {
             userSearchAdapter.setItem(it)
         }
-        userSearchAdapter.setItemClickListener { onUserItemClick(it) }
+        userSearchViewModel.searchItemClickEvent.observe(this) {
+            it.getContentIfNotHandled()?.let {
+                userSearchViewModel.setSearchItemClickEvent()
+                userSearchAdapter.setItemClickListener { onUserItemClick("kidney") }
+            }
+        }
+        /*with(userSearchViewModel) {
+            users.observe(::getLifecycle) { it ->
+                userSearchAdapter.setItem(it)
+            }
+            searchItemClickEvent.observe(
+                ::getLifecycle
+            ) {
+                it.getContentIfNotHandled()?.let {
+                    userSearchAdapter.setItemClickListener { onUserItemClick("kimdahyee") }
+                }
+            }
+        }*/
         binding.rcvUserSearch.adapter = userSearchAdapter
         binding.btUserSearch.setOnClickListener { onSearchClick() }
         setContentView(binding.root)
     }
 
-    private fun onUserItemClick(user: User) {
+    private fun onUserItemClick(username: String) {
         val intent = Intent(this, UserDetailActivity::class.java)
-        intent.putExtra("username", user.name)
+        intent.putExtra("username", username)
         startActivity(intent)
     }
 

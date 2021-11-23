@@ -1,7 +1,7 @@
-package place.pic.android.plus.remote
+package place.pic.android.plus.data.remote
 
-import place.pic.android.plus.model.UserDetail
-import place.pic.android.plus.remote.response.UserSearchResponse
+import place.pic.android.plus.data.model.UserDetail
+import place.pic.android.plus.data.remote.response.UserSearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

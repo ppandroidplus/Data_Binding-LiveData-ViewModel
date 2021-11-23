@@ -1,11 +1,11 @@
-package place.pic.android.plus.viewmodel
+package place.pic.android.plus.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import place.pic.android.plus.model.UserDetail
-import place.pic.android.plus.remote.GithubApiServiceImpl
+import place.pic.android.plus.data.model.UserDetail
+import place.pic.android.plus.data.remote.GithubApiServiceImpl
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +35,7 @@ class UserDetailViewModel : ViewModel() {
         ).enqueue(object : Callback<UserDetail> {
             override fun onResponse(call: Call<UserDetail>, response: Response<UserDetail>) {
                 if (response.isSuccessful) {
+                    Log.d("디테일 서버 요청하는 부분", response.body()!!.name)
                     user = UserDetail(
                         imageUrl = response.body()?.imageUrl,
                         name = response.body()!!.name,
