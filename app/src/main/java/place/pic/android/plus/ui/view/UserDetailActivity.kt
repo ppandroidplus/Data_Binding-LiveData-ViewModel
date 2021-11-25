@@ -3,7 +3,6 @@ package place.pic.android.plus.ui.view
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import place.pic.android.plus.R
 import place.pic.android.plus.databinding.ActivityUserDatailBinding
 import place.pic.android.plus.ui.viewmodel.UserDetailViewModel
 
@@ -14,7 +13,6 @@ class UserDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_datail)
         username = intent.getStringExtra("username").toString()
         init()
     }

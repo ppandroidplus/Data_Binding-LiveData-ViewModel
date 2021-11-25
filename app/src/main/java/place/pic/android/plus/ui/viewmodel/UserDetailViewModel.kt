@@ -35,7 +35,6 @@ class UserDetailViewModel : ViewModel() {
         ).enqueue(object : Callback<UserDetail> {
             override fun onResponse(call: Call<UserDetail>, response: Response<UserDetail>) {
                 if (response.isSuccessful) {
-                    Log.d("디테일 서버 요청하는 부분", response.body()!!.name)
                     user = UserDetail(
                         imageUrl = response.body()?.imageUrl,
                         name = response.body()!!.name,
