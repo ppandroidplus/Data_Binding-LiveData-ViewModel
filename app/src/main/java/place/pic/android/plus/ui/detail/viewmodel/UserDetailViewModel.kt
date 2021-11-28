@@ -1,11 +1,11 @@
-package place.pic.android.plus.viewmodel
+package place.pic.android.plus.ui.detail.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import place.pic.android.plus.model.UserDetail
-import place.pic.android.plus.remote.GithubApiServiceImpl
+import place.pic.android.plus.data.model.UserDetail
+import place.pic.android.plus.data.remote.GithubApiServiceImpl
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

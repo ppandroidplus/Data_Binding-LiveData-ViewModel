@@ -10,7 +10,7 @@
 
         <variable
             name="user"
-            type="place.pic.android.plus.model.User" />
+            type="place.pic.android.plus.data.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

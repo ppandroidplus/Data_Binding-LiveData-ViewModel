@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AssignmentMVVM">
         <activity
-            android:name=".view.UserDetailActivity"
+            android:name=".ui.detail.view.UserDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.UserSearchActivity"
+            android:name=".ui.search.view.UserSearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

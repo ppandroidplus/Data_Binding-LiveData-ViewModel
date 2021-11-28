@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
-            type="place.pic.android.plus.viewmodel.UserDetailViewModel" />
+            type="place.pic.android.plus.ui.detail.viewmodel.UserDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.UserDetailActivity">
+        tools:context=".ui.detail.view.UserDetailActivity">
 
         <ImageView
             android:id="@+id/img_user_detail"
@@ -44,6 +46,7 @@
             android:layout_marginTop="10dp"
             android:textSize="16dp"
             android:text="@{viewModel.userDetail.bio}"
+            android:visibility="@{viewModel.userDetail.bio == null ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@+id/tv_user_detail_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_detail_name" />
 

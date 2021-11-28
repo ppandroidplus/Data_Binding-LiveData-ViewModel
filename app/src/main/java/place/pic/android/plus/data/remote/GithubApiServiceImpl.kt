@@ -1,4 +1,4 @@
-package place.pic.android.plus.remote
+package place.pic.android.plus.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package place.pic.android.plus.adapter
+package place.pic.android.plus.utils.adapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

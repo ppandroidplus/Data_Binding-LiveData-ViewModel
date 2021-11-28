@@ -1,11 +1,11 @@
-package place.pic.android.plus.adapter
+package place.pic.android.plus.ui.search.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import place.pic.android.plus.databinding.ItemUserSearchBinding
-import place.pic.android.plus.model.User
+import place.pic.android.plus.data.model.User
 
 /**
  * Created By kimdahyee
