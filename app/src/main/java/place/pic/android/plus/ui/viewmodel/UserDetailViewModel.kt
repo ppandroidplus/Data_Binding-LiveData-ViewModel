@@ -26,6 +26,7 @@ class UserDetailViewModel : ViewModel() {
 
     fun setUserDetail() {
         _userDetail.value = user
+        Log.d("디테일세터확인", _userDetail.value!!.name)
     }
 
     fun requestUserDetail(login: String) {
