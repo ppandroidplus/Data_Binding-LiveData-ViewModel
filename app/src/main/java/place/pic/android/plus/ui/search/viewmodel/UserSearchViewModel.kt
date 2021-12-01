@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import place.pic.android.plus.data.model.User
 import place.pic.android.plus.data.remote.GithubApiServiceImpl
 import place.pic.android.plus.data.remote.response.UserSearchResponse
-import place.pic.android.plus.ui.search.adapter.UserSearchAdapter
 import place.pic.android.plus.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +20,7 @@ import retrofit2.Response
 class UserSearchViewModel : ViewModel() {
 
     private val list = mutableListOf<User>()
-    private val userSearchAdapter by lazy { UserSearchAdapter() }
+    val searchQuery = MutableLiveData("")
 
     private val _users = MutableLiveData<List<User>>()
     val users: LiveData<List<User>>
@@ -36,17 +35,8 @@ class UserSearchViewModel : ViewModel() {
     val showErrorToast: LiveData<Event<Boolean>>
         get() = _showErrorToast
 
-    private fun onButtonClickEvent() {
+    private fun sendErrorEvent() {
         _showErrorToast.value = Event(true)
-    }
-
-    private val _userItemClickEvent = MutableLiveData<Event<String>>()
-    val userItemClickEvent: LiveData<Event<String>>
-        get() = _userItemClickEvent
-
-    fun onUserItemClick(itemId: String) {
-        _userItemClickEvent.value = Event(itemId)
-        // 새 이벤트를 새 값으로 설정하여 이벤트 트리거
     }
 
     private fun requestUserSearch(query: String) {
@@ -78,13 +68,11 @@ class UserSearchViewModel : ViewModel() {
         })
     }
 
-    fun onClickButton(input: String) {
-        if (input == null) {
-            onButtonClickEvent()
-        } else {
-            input.run {
-                requestUserSearch(input)
-            }
+    fun onSearchButtonClick(input: String) {
+        if (input.isEmpty()) {
+            sendErrorEvent()
+            return
         }
+        requestUserSearch(input)
     }
 }

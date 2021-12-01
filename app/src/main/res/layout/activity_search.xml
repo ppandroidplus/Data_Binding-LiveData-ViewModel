@@ -22,6 +22,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
             android:background="@null"
+            android:text="@={viewModel.searchQuery}"
             android:hint="검색어를 입력하세요 :)"
             app:layout_constraintEnd_toStartOf="@+id/bt_user_search"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,7 @@
             android:layout_marginEnd="20dp"
             android:backgroundTint="#002AD6"
             android:text="search"
-            android:onClick="@{() -> viewModel.onClickButton(etUserSearch.getText().toString())}"
+            android:onClick="@{() -> viewModel.onSearchButtonClick(viewModel.searchQuery)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/et_user_search"
             tools:ignore="OnClick,SpeakableTextPresentCheck" />

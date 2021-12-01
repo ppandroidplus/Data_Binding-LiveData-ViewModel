@@ -7,7 +7,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import place.pic.android.plus.R
 import place.pic.android.plus.data.model.User
 import place.pic.android.plus.databinding.ActivitySearchBinding
 import place.pic.android.plus.ui.detail.view.UserDetailActivity
@@ -22,36 +24,38 @@ class UserSearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
+        inputErrorCheck()
+        searchUser()
     }
 
     private fun init() {
-        val binding = ActivitySearchBinding.inflate(layoutInflater)
+        val binding =
+            DataBindingUtil.setContentView<ActivitySearchBinding>(this, R.layout.activity_search)
         binding.lifecycleOwner = this
         binding.viewModel = userSearchViewModel
         binding.rcvUserSearch.adapter = userSearchAdapter
+    }
+
+    private fun inputErrorCheck() {
         userSearchViewModel.showErrorToast.observe(
             this,
             Observer {
-                it.peekContent()?.let {
+                it.getContentIfNotHandled().let {
                     Toast.makeText(this, "검색어를 입력하세요!", Toast.LENGTH_SHORT).show()
                 }
             }
         )
+    }
+
+    private fun searchUser() {
         userSearchViewModel.users.observe(this) { it ->
             hideKeyboard()
             userSearchAdapter.setItem(it)
+            userSearchAdapter.setItemClickListener { onUserItemClick(it) }
         }
-        /*userSearchViewModel.userItemClickEvent.observe(this, { it ->
-            it.getContentIfNotHandled()?.let {
-                userSearchAdapter.setItemClickListener { onUserClick(it) }
-            }
-        })*/
-        userSearchAdapter.setItemClickListener { onUserClick(it) }
-        setContentView(binding.root)
     }
 
-    private fun onUserClick(user: User) {
-        userSearchViewModel.onUserItemClick("userItemClick")
+    private fun onUserItemClick(user: User) {
         val intent = Intent(this, UserDetailActivity::class.java)
         intent.putExtra("username", user.name)
         startActivity(intent)

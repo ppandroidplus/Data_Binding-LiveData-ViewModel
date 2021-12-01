@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import place.pic.android.plus.databinding.ItemUserSearchBinding
 import place.pic.android.plus.data.model.User
+import place.pic.android.plus.databinding.ItemUserSearchBinding
 
 /**
  * Created By kimdahyee
