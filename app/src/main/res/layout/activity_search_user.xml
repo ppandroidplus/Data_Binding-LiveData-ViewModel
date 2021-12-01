@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="SearchUserActivity"
+            type="place.pic.android.plus.search.viewmodel.SearchUserViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cl_user_search"
+        tools:context=".search.SearchUserActivity">
+
+        <EditText
+            android:id="@+id/et_user_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/border_white_fill_round_20"
+            android:hint="유저 검색하기"
+            android:textColorHint="@color/white"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingVertical="15dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+            <!-- android:text="@={SearchUserActivity.searchText}" -->
+
+        <ImageView
+            android:id="@+id/btn_user_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_search_24"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_user_search" />
+
+        <ImageView
+            android:id="@+id/btn_user_search_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_baseline_clear_24"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_user_search" />
+        <!-- setButtonChange="@{SearchUserActivity.compass}"
+            android:onClick="@{()->SearchUserActivity.compassIcon()}" -->
+
+        <View
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_user_search" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_user_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:paddingBottom="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            tools:listitem="@layout/item_user_search" />
+        <!-- app:bindRecyclerView="@{SearchUserActivity.recyclerListData}" -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
