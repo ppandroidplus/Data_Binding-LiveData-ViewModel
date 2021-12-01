@@ -4,11 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import place.pic.android.plus.utils.Event
-import place.pic.android.plus.ui.search.adapter.UserSearchAdapter
 import place.pic.android.plus.data.model.User
 import place.pic.android.plus.data.remote.GithubApiServiceImpl
 import place.pic.android.plus.data.remote.response.UserSearchResponse
+import place.pic.android.plus.ui.search.adapter.UserSearchAdapter
+import place.pic.android.plus.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +32,14 @@ class UserSearchViewModel : ViewModel() {
         _users.value = list
     }
 
+    private val _showErrorToast = MutableLiveData<Event<Boolean>>()
+    val showErrorToast: LiveData<Event<Boolean>>
+        get() = _showErrorToast
+
+    private fun onButtonClickEvent() {
+        _showErrorToast.value = Event(true)
+    }
+
     private val _userItemClickEvent = MutableLiveData<Event<String>>()
     val userItemClickEvent: LiveData<Event<String>>
         get() = _userItemClickEvent
@@ -41,7 +49,7 @@ class UserSearchViewModel : ViewModel() {
         // 새 이벤트를 새 값으로 설정하여 이벤트 트리거
     }
 
-    fun requestUserSearch(query: String) {
+    private fun requestUserSearch(query: String) {
         GithubApiServiceImpl.service.requestUserSearch(
             param = query
         ).enqueue(object : Callback<UserSearchResponse> {
@@ -68,5 +76,12 @@ class UserSearchViewModel : ViewModel() {
                 t.message?.let { Log.d("fail", it) }
             }
         })
+    }
+
+    fun onClickButton(input: String) {
+        /* 예외의 경우에 Toast 메세지를 띄우고 싶으면 어찌하나 -> 양방향 결합 필요 ? */
+        input.run {
+            requestUserSearch(input)
+        }
     }
 }
