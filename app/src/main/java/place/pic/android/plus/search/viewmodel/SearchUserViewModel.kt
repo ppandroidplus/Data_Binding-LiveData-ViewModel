@@ -14,10 +14,24 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class SearchUserViewModel : ViewModel() {
-
     private val _recyclerListData = MutableLiveData<List<SearchUserData>>()
     val recyclerListData: LiveData<List<SearchUserData>>
         get() = _recyclerListData
+
+    /*
+    private val _compass = MutableLiveData<Boolean>(false)
+    val compass: LiveData<Boolean> = _compass
+
+    private val _searchText = MutableLiveData<String>()
+    val searchText: LiveData<String> = _searchText
+
+    fun compassIcon() {
+        _compass.value = !_compass.value!!
+    }
+
+    fun searchTextWacher(){
+    }
+    */
 
     fun requestUserData(toString: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,5 +44,12 @@ class SearchUserViewModel : ViewModel() {
                 this.cancel()
             }
         }
+        // userClick()
     }
+
+    /*
+    private fun userClick(){
+       _recyclerListData.call()
+    }
+     */
 }

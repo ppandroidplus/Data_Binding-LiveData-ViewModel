@@ -6,10 +6,10 @@ data class ResponseUserSearch(
     val total_count: Int,
     val incomplete_results: Boolean,
     val items: List<SearchUserData>
-)
+) : Serializable
 
 data class SearchUserData(
-    var login: String,
-    var avatar_url: String,
-    var html_url: String
+    val login: String,
+    val avatar_url: String,
+    val html_url: String
 ) : Serializable

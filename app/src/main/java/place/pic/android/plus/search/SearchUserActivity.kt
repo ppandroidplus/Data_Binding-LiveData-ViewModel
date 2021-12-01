@@ -1,6 +1,5 @@
 package place.pic.android.plus.search
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -24,15 +23,16 @@ import place.pic.android.plus.search.viewmodel.SearchUserViewModel
 class SearchUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchUserBinding
     private val searchUserViewModel: SearchUserViewModel by viewModels()
-    lateinit var searchUserAdapter: SearchUserAdapter
+    private lateinit var searchUserAdapter: SearchUserAdapter
+    private val userList = mutableListOf<SearchUserData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search_user)
         searchUserAdapter = SearchUserAdapter()
-        binding.rvUserSearch.adapter = searchUserAdapter
         binding.searchUserActivity = searchUserViewModel
         binding.lifecycleOwner = this
+        binding.rvUserSearch.adapter = searchUserAdapter
 
         searchUser()
         changeButton()
@@ -41,6 +41,10 @@ class SearchUserActivity : AppCompatActivity() {
     }
 
     private fun searchUser() {
+        searchUserViewModel.recyclerListData.observe(this) {
+            searchUserAdapter.submitList(it)
+        }
+
         binding.etUserSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -52,29 +56,10 @@ class SearchUserActivity : AppCompatActivity() {
                 return false
             }
         })
-        createData()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun createData() {
-        searchUserViewModel.recyclerListData.observe(
-            this,
-            { recyclerListData ->
-                recyclerListData?.let {
-                    if (it.isNotEmpty()) {
-                        binding.rvUserSearch.visibility = View.VISIBLE
-                        searchUserAdapter.datas = it as MutableList<SearchUserData>
-                        searchUserAdapter.notifyDataSetChanged()
-                    } else {
-                        binding.rvUserSearch.visibility = View.INVISIBLE
-                    }
-                }
-            }
-        )
-    }
-
+    // livedata 쓰기
     private fun changeButton() {
-        // 검색 -> x 로 변경
         binding.etUserSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 binding.btnUserSearch.visibility = View.VISIBLE
@@ -91,19 +76,20 @@ class SearchUserActivity : AppCompatActivity() {
         })
     }
 
+    // Btn 바인딩으로빼기
     private fun deleteText() {
         binding.btnUserSearchDelete.setOnClickListener {
-            binding.rvUserSearch.visibility = View.INVISIBLE
             binding.etUserSearch.text.clear()
-            searchUserAdapter.clearData()
         }
     }
 
+    // 여기 바꿔야함요 ㅎㅎ
     private fun gotoDetail() {
         searchUserAdapter.itemClick = object : SearchUserAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
                 val intent = Intent(this@SearchUserActivity, DetailUserActivity::class.java)
-                intent.putExtra("user", searchUserAdapter.datas[position])
+
+                intent.putExtra("user", userList[position])
                 startActivity(intent)
             }
         }

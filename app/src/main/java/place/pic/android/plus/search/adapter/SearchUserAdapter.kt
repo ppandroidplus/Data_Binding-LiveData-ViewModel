@@ -3,14 +3,13 @@ package place.pic.android.plus.search.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import place.pic.android.plus.data.remote.response.SearchUserData
 import place.pic.android.plus.databinding.ItemUserSearchBinding
 
-class SearchUserAdapter : RecyclerView.Adapter<SearchUserAdapter.SearchUserViewHolder>() {
-    var datas: MutableList<SearchUserData> = mutableListOf()
-
+class SearchUserAdapter : ListAdapter<SearchUserData, SearchUserAdapter.SearchUserViewHolder>(SearchUserDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchUserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemUserSearchBinding.inflate(layoutInflater, parent, false)
@@ -18,7 +17,8 @@ class SearchUserAdapter : RecyclerView.Adapter<SearchUserAdapter.SearchUserViewH
     }
 
     override fun onBindViewHolder(holder: SearchUserViewHolder, position: Int) {
-        holder.bind(datas[position])
+        val user = getItem(position)
+        holder.bind(user)
         if (itemClick != null) {
             holder.itemView.setOnClickListener { v ->
                 itemClick?.onClick(v, position)
@@ -26,32 +26,25 @@ class SearchUserAdapter : RecyclerView.Adapter<SearchUserAdapter.SearchUserViewH
         }
     }
 
-    override fun getItemCount(): Int {
-        return datas.size
+    class SearchUserViewHolder(private val binding: ItemUserSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(searchUserData: SearchUserData) {
+            binding.user = searchUserData
+            binding.executePendingBindings()
+        }
     }
 
-    class SearchUserViewHolder(private val binding: ItemUserSearchBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val layout = binding.clItemUserSearch
-        private val userName = binding.tvUserName
-        private val userImage = binding.imgUser
+    private class SearchUserDiffUtil : DiffUtil.ItemCallback<SearchUserData>() {
+        override fun areItemsTheSame(oldItem: SearchUserData, newItem: SearchUserData): Boolean {
+            return oldItem.login == newItem.login
+        }
 
-        fun bind(searchUserData: SearchUserData) {
-            userName.text = searchUserData.login
-            Glide.with(itemView)
-                .load(searchUserData.avatar_url)
-                .circleCrop()
-                .into(userImage)
-            layout.isEnabled = true
+        override fun areContentsTheSame(oldItem: SearchUserData, newItem: SearchUserData): Boolean {
+            return oldItem == newItem
         }
     }
 
     interface ItemClick {
         fun onClick(view: View, position: Int)
-    }
-
-    fun clearData() {
-        datas.clear()
-        notifyDataSetChanged()
     }
 
     var itemClick: ItemClick? = null

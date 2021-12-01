@@ -34,6 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+            <!-- android:text="@={SearchUserActivity.searchText}" -->
 
         <ImageView
             android:id="@+id/btn_user_search"
@@ -58,6 +59,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/et_user_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/et_user_search" />
+        <!-- setButtonChange="@{SearchUserActivity.compass}"
+            android:onClick="@{()->SearchUserActivity.compassIcon()}" -->
 
         <View
             android:id="@+id/imageView2"
@@ -83,6 +86,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:listitem="@layout/item_user_search" />
+        <!-- app:bindRecyclerView="@{SearchUserActivity.recyclerListData}" -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
