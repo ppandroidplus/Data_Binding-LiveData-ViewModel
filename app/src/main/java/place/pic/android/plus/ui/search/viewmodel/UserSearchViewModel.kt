@@ -79,9 +79,12 @@ class UserSearchViewModel : ViewModel() {
     }
 
     fun onClickButton(input: String) {
-        /* 예외의 경우에 Toast 메세지를 띄우고 싶으면 어찌하나 -> 양방향 결합 필요 ? */
-        input.run {
-            requestUserSearch(input)
+        if (input == null) {
+            onButtonClickEvent()
+        } else {
+            input.run {
+                requestUserSearch(input)
+            }
         }
     }
 }

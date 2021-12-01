@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import place.pic.android.plus.data.model.User
 import place.pic.android.plus.databinding.ActivitySearchBinding
 import place.pic.android.plus.ui.detail.view.UserDetailActivity
@@ -27,15 +29,23 @@ class UserSearchActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = userSearchViewModel
         binding.rcvUserSearch.adapter = userSearchAdapter
+        userSearchViewModel.showErrorToast.observe(
+            this,
+            Observer {
+                it.peekContent()?.let {
+                    Toast.makeText(this, "검색어를 입력하세요!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
         userSearchViewModel.users.observe(this) { it ->
             hideKeyboard()
             userSearchAdapter.setItem(it)
         }
-        userSearchViewModel.userItemClickEvent.observe(this, { it ->
+        /*userSearchViewModel.userItemClickEvent.observe(this, { it ->
             it.getContentIfNotHandled()?.let {
                 userSearchAdapter.setItemClickListener { onUserClick(it) }
             }
-        })
+        })*/
         userSearchAdapter.setItemClickListener { onUserClick(it) }
         setContentView(binding.root)
     }
