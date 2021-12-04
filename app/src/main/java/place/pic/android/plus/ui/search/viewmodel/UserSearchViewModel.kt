@@ -26,7 +26,7 @@ class UserSearchViewModel : ViewModel() {
     val users: LiveData<List<User>>
         get() = _users
 
-    fun addUser(user: User) {
+    private fun addUser(user: User) {
         list.add(user)
         _users.value = list
     }

@@ -6,11 +6,17 @@ import com.bumptech.glide.Glide
 
 /**
  * Created By kimdahyee
- * on 11월 04일, 2020
+ * on 12월 05일, 2020
  */
 
-class UserDetailBindingAdapter {
+class UserBindingAdapter {
     companion object {
+        @JvmStatic
+        @BindingAdapter("userImageUrl")
+        fun loadUserImage(imageView: ImageView, url: String) {
+            Glide.with(imageView.context).load(url).into(imageView)
+        }
+
         @JvmStatic
         @BindingAdapter("detailImageUrl")
         fun loadDetailImage(imageView: ImageView, url: String?) {

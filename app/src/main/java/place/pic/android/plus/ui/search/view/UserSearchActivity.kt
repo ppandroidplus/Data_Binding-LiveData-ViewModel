@@ -37,14 +37,11 @@ class UserSearchActivity : AppCompatActivity() {
     }
 
     private fun inputErrorCheck() {
-        userSearchViewModel.showErrorToast.observe(
-            this,
-            Observer {
-                it.getContentIfNotHandled().let {
-                    Toast.makeText(this, "검색어를 입력하세요!", Toast.LENGTH_SHORT).show()
-                }
+        userSearchViewModel.showErrorToast.observe(this) {
+            it.getContentIfNotHandled().let {
+                Toast.makeText(this, "검색어를 입력하세요!", Toast.LENGTH_SHORT).show()
             }
-        )
+        }
     }
 
     private fun searchUser() {
