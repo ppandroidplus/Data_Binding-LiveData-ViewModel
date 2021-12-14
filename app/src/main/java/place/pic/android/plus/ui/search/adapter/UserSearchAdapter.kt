@@ -15,7 +15,7 @@ import place.pic.android.plus.databinding.ItemUserSearchBinding
 class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>() {
 
     private var data: MutableList<User> = mutableListOf()
-    private var itemClickListener: ((user: User) -> Unit) ? = null
+    private var itemClickListener: ((user: User) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
