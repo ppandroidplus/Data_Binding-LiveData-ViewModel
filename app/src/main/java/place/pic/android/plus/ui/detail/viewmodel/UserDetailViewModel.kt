@@ -19,14 +19,9 @@ class UserDetailViewModel : ViewModel() {
 
     private val token = "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"
 
-    private lateinit var user: UserDetail
     private val _userDetail = MutableLiveData<UserDetail>()
     val userDetail: LiveData<UserDetail>
         get() = _userDetail
-
-    fun setUserDetail() {
-        _userDetail.value = user
-    }
 
     fun requestUserDetail(login: String) {
         GithubApiServiceImpl.service.requestUserDetail(
@@ -35,15 +30,16 @@ class UserDetailViewModel : ViewModel() {
         ).enqueue(object : Callback<UserDetail> {
             override fun onResponse(call: Call<UserDetail>, response: Response<UserDetail>) {
                 if (response.isSuccessful) {
-                    user = UserDetail(
-                        imageUrl = response.body()?.imageUrl,
-                        name = response.body()!!.name,
-                        bio = response.body()?.bio,
-                        followers = response.body()!!.followers,
-                        htmlUrl = response.body()!!.htmlUrl
-                    )
+                    _userDetail.value = response.body()
                 }
-                setUserDetail()
+
+                if (response.code() in 400..499) {
+                    Log.d("error code 4xx", "Client errors")
+                }
+
+                if (response.code() in 500..599) {
+                    Log.d("error code 5xx", "Server errors")
+                }
             }
 
             override fun onFailure(call: Call<UserDetail>, t: Throwable) {

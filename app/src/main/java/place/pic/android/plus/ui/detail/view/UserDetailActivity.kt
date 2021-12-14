@@ -1,6 +1,7 @@
 package place.pic.android.plus.ui.detail.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -15,6 +16,7 @@ class UserDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
+        checkErrorAndRequest()
     }
 
     private fun init() {
@@ -22,7 +24,14 @@ class UserDetailActivity : AppCompatActivity() {
             DataBindingUtil.setContentView<ActivityUserDatailBinding>(this, R.layout.activity_user_datail)
         binding.viewModel = userDetailViewModel
         binding.lifecycleOwner = this
+    }
+
+    private fun checkErrorAndRequest() {
         val username = intent.getStringExtra("username").toString()
+        if (username.isEmpty()) {
+            Log.d("error check", "userDetailActivity username is null")
+            return
+        }
         userDetailViewModel.requestUserDetail(username)
     }
 }

@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import place.pic.android.plus.R
 import place.pic.android.plus.data.model.User
 import place.pic.android.plus.databinding.ActivitySearchBinding

@@ -34,7 +34,6 @@ class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>
     inner class UserViewHolder(
         private val binding: ItemUserSearchBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(user: User) {
             binding.user = user
             binding.clickListener = createUserItemClickListener(user)
@@ -43,6 +42,7 @@ class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>
 
     fun setItem(users: List<User>) {
         data = users as MutableList<User>
+        // users : 늘어나지도 않는 주머니
         notifyDataSetChanged()
     }
 

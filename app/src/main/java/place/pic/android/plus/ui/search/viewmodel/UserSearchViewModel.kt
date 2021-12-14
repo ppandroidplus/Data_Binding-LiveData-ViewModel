@@ -47,22 +47,32 @@ class UserSearchViewModel : ViewModel() {
                 call: Call<UserSearchResponse>,
                 response: Response<UserSearchResponse>
             ) {
-                if (response.isSuccessful) {
+                if (response.isSuccessful) { // 200~300
                     Log.d("server check", "통신 성공")
                     list.clear()
-                    for (i in response.body()!!.items.indices) {
+                    response.body()!!.items.forEach {
                         addUser(
                             User(
-                                imageUrl = response.body()!!.items[i].avatar_url,
-                                name = response.body()!!.items[i].login,
-                                id = response.body()!!.items[i].id
+                                imageUrl = it.avatar_url,
+                                name = it.login,
+                                id = it.id
                             )
                         )
                     }
                 }
+
+                // 4xx Client error 5xx server error
+                if (response.code() in 400..499) {
+                    Log.d("error code 4xx", "Client errors")
+                }
+
+                if (response.code() in 500..599) {
+                    Log.d("error code 5xx", "Server errors")
+                }
             }
 
             override fun onFailure(call: Call<UserSearchResponse>, t: Throwable) {
+                // 통신 자체가 실패
                 t.message?.let { Log.d("fail", it) }
             }
         })
