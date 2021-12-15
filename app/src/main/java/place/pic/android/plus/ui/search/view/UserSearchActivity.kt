@@ -3,6 +3,7 @@ package place.pic.android.plus.ui.search.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -47,7 +48,12 @@ class UserSearchActivity : AppCompatActivity() {
         userSearchViewModel.users.observe(this) { it ->
             hideKeyboard()
             userSearchAdapter.setItem(it)
-            userSearchAdapter.setItemClickListener { onUserItemClick(it) }
+            userSearchAdapter.setItemClickListener(object : UserSearchAdapter.ItemClickListener {
+                override fun onClick(view: View, position: Int) {
+                    onUserItemClick(it[position])
+                }
+            })
+            // userSearchAdapter.setItemClickListener { onUserItemClick(it) }
         }
     }
 

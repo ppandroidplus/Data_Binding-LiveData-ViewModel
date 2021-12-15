@@ -15,7 +15,8 @@ import place.pic.android.plus.databinding.ItemUserSearchBinding
 class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>() {
 
     private var data: MutableList<User> = mutableListOf()
-    private var itemClickListener: ((user: User) -> Unit)? = null
+    private lateinit var itemClickListener: ItemClickListener
+    // private var itemClickListener: ((user: User) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -25,32 +26,43 @@ class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(data[position])
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    inner class UserViewHolder(
+    class UserViewHolder(
         private val binding: ItemUserSearchBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.user = user
-            binding.clickListener = createUserItemClickListener(user)
+            // binding.clickListener = createUserItemClickListener(user)
         }
+    }
+
+    interface ItemClickListener {
+        fun onClick(view: View, position: Int)
+    }
+
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
 
     fun setItem(users: List<User>) {
         data = users as MutableList<User>
-        // users : 늘어나지도 않는 주머니
+        // users : 늘어나지 않는 주머니
         notifyDataSetChanged()
     }
 
-    fun setItemClickListener(itemClickListener: ((user: User) -> Unit)?) {
+    /*fun setItemClickListener(itemClickListener: ((user: User) -> Unit)?) {
         this.itemClickListener = itemClickListener
     }
 
     fun createUserItemClickListener(user: User) = View.OnClickListener {
         itemClickListener?.invoke(user)
-    }
+    }*/
 }

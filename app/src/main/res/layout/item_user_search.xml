@@ -2,7 +2,9 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
+    <!-- android:onClick="@{clickListener}"  -->
+
     <data>
         <variable
             name="clickListener"
@@ -16,7 +18,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{clickListener}"
         android:background="?attr/selectableItemBackground"
         android:id="@+id/cl_item_user_search"
         android:layout_width="match_parent"
