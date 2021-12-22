@@ -14,7 +14,7 @@ import place.pic.android.plus.databinding.ItemUserSearchBinding
 
 class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>() {
 
-    private var data: MutableList<User> = mutableListOf()
+    private val data: MutableList<User> = mutableListOf()
     private lateinit var itemClickListener: ItemClickListener
     // private var itemClickListener: ((user: User) -> Unit)? = null
 
@@ -53,8 +53,8 @@ class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserViewHolder>
     }
 
     fun setItem(users: List<User>) {
-        data = users as MutableList<User>
-        // users : 늘어나지 않는 주머니
+        data.clear()
+        data.addAll(users)
         notifyDataSetChanged()
     }
 

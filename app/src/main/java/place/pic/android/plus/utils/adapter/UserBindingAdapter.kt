@@ -13,13 +13,7 @@ class UserBindingAdapter {
     companion object {
         @JvmStatic
         @BindingAdapter("userImageUrl")
-        fun loadUserImage(imageView: ImageView, url: String) {
-            Glide.with(imageView.context).load(url).into(imageView)
-        }
-
-        @JvmStatic
-        @BindingAdapter("detailImageUrl")
-        fun loadDetailImage(imageView: ImageView, url: String?) {
+        fun loadUserImage(imageView: ImageView, url: String?) {
             Glide.with(imageView.context).load(url).into(imageView)
         }
     }
